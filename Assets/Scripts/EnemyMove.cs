@@ -19,7 +19,7 @@ public class EnemyMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         CapsuleCollider2D capsuleCollider = GetComponent<CapsuleCollider2D>();
 
-       Invoke("Think", 5); //5초 뒤에 Think 함수 실행
+       Invoke("Think", 0.5f); //5초 뒤에 Think 함수 실행
 
     }
 
@@ -51,7 +51,7 @@ public class EnemyMove : MonoBehaviour
             spriteRenderer.flipX = nextMove == 1; //1이면 true
 
         //Think(); 재귀함수(에러 발생 가능성 있음)
-        float nextThinkTime = Random.Range(2f, 5f); //2초에서 5초 사이에 랜덤으로 나옴
+        float nextThinkTime = Random.Range(2f, 4f); //2초에서 4초 사이에 랜덤으로 나옴
         Invoke("Think", nextThinkTime);
     }
 
@@ -61,7 +61,7 @@ public class EnemyMove : MonoBehaviour
         spriteRenderer.flipX = nextMove == 1;
 
         CancelInvoke("Think"); //Think 함수 취소
-        Invoke("Think", 0.5f); //2초 뒤에 Think 함수 실행
+        Invoke("Think", 1f); //2초 뒤에 Think 함수 실행
         Debug.Log(nextMove);
 
     }
@@ -77,7 +77,7 @@ public class EnemyMove : MonoBehaviour
         //Die Effect Jump
         rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
         //Destroy
-        Invoke("DeActive", 5);
+        Invoke("DeActive", 3);
     }
 
     void DeActive()
