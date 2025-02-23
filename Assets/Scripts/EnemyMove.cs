@@ -1,5 +1,4 @@
-using JetBrains.Annotations;
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class EnemyMove : MonoBehaviour
     SpriteRenderer spriteRenderer;
     CapsuleCollider2D capsuleCollider;
 
-    public int nextMove; //1: ¿À¸¥ÂÊ, -1: ¿ŞÂÊ // Çàµ¿ÁöÇ¥¸¦ °áÁ¤ÇÒ º¯¼ö »ı¼º
+    public int nextMove; //1: ì˜¤ë¥¸ìª½, -1: ì™¼ìª½ // í–‰ë™ì§€í‘œë¥¼ ê²°ì •í•  ë³€ìˆ˜ ìƒì„±
 
 
     void Awake()
@@ -19,7 +18,7 @@ public class EnemyMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         CapsuleCollider2D capsuleCollider = GetComponent<CapsuleCollider2D>();
 
-       Invoke("Think", 0.5f); //5ÃÊ µÚ¿¡ Think ÇÔ¼ö ½ÇÇà
+        Invoke("Think", 0.5f); //5ì´ˆ ë’¤ì— Think í•¨ìˆ˜ ì‹¤í–‰
 
     }
 
@@ -27,41 +26,41 @@ public class EnemyMove : MonoBehaviour
     void FixedUpdate()
     {
         //Move
-        rigid.velocity = new Vector2(nextMove, rigid.velocity.y/*ÇöÀç °¡Áö°í ÀÖ´Â º¤ÅÍ °ª*/);
+        rigid.velocity = new Vector2(nextMove, rigid.velocity.y/*í˜„ì¬ ê°€ì§€ê³  ìˆëŠ” ë²¡í„° ê°’*/);
 
         //Platform Check    
-        Vector2 frontVec = new Vector2(rigid.position.x + nextMove *0.2f, rigid.position.y); //¾ÕÀÇ ÁöÇü¹°À» ¿¹ÃøÇØ¾ß ÇÔ, ¾Õ¿¡ ÀÖ´Â º¤ÅÍ °ª
-        Debug.DrawRay(frontVec, Vector3.down/*½î´Â ¹æÇâ*/, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1/*°Å¸®*/, LayerMask.GetMask("Platform")/*ÇÃ·§Æû ·¹ÀÌ¾î¿¡¸¸ ´ê°Ú½À´Ï´Ù*/);
+        Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.2f, rigid.position.y); //ì•ì˜ ì§€í˜•ë¬¼ì„ ì˜ˆì¸¡í•´ì•¼ í•¨, ì•ì— ìˆëŠ” ë²¡í„° ê°’
+        Debug.DrawRay(frontVec, Vector3.down/*ì˜ëŠ” ë°©í–¥*/, new Color(0, 1, 0));
+        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1/*ê±°ë¦¬*/, LayerMask.GetMask("Platform")/*í”Œë«í¼ ë ˆì´ì–´ì—ë§Œ ë‹¿ê² ìŠµë‹ˆë‹¤*/);
         if (rayHit.collider == null) //
             Turn();
-        
+
     }
 
     void Think()
     {
         //Set Next Active
-        nextMove = Random.Range(-1, 2); //(ÃÖ¼Ò°ª(ÃÖ¼Ò´Â ·£´ı °ª¿¡ Æ÷ÇÔÀÌ µÊ), ÃÖ´ë°ª(ÃÖ´ë´Â ·£´ı °ª¿¡ Æ÷ÇÔÀÌ µÇÁö ¾ÊÀ½)) -1, 0, 1 Áß¿¡ ·£´ıÀ¸·Î ³ª¿È
+        nextMove = Random.Range(-1, 2); //(ìµœì†Œê°’(ìµœì†ŒëŠ” ëœë¤ ê°’ì— í¬í•¨ì´ ë¨), ìµœëŒ€ê°’(ìµœëŒ€ëŠ” ëœë¤ ê°’ì— í¬í•¨ì´ ë˜ì§€ ì•ŠìŒ)) -1, 0, 1 ì¤‘ì— ëœë¤ìœ¼ë¡œ ë‚˜ì˜´
 
         //Sprite Animation
         anim.SetInteger("WalkSpeed", nextMove);
 
         //Flip Sprite
-        if (nextMove != 0) //¸ØÃß´Â °æ¿ì°¡ ¾Æ´Ï¸é
-            spriteRenderer.flipX = nextMove == 1; //1ÀÌ¸é true
+        if (nextMove != 0) //ë©ˆì¶”ëŠ” ê²½ìš°ê°€ ì•„ë‹ˆë©´
+            spriteRenderer.flipX = nextMove == 1; //1ì´ë©´ true
 
-        //Think(); Àç±ÍÇÔ¼ö(¿¡·¯ ¹ß»ı °¡´É¼º ÀÖÀ½)
-        float nextThinkTime = Random.Range(2f, 4f); //2ÃÊ¿¡¼­ 4ÃÊ »çÀÌ¿¡ ·£´ıÀ¸·Î ³ª¿È
+        //Think(); ì¬ê·€í•¨ìˆ˜(ì—ëŸ¬ ë°œìƒ ê°€ëŠ¥ì„± ìˆìŒ)
+        float nextThinkTime = Random.Range(2f, 4f); //2ì´ˆì—ì„œ 4ì´ˆ ì‚¬ì´ì— ëœë¤ìœ¼ë¡œ ë‚˜ì˜´
         Invoke("Think", nextThinkTime);
     }
 
     void Turn()
     {
-        nextMove *= -1; //¹æÇâ ¹Ù²Ù±â
+        nextMove *= -1; //ë°©í–¥ ë°”ê¾¸ê¸°
         spriteRenderer.flipX = nextMove == 1;
 
-        CancelInvoke("Think"); //Think ÇÔ¼ö Ãë¼Ò
-        Invoke("Think", 1f); //2ÃÊ µÚ¿¡ Think ÇÔ¼ö ½ÇÇà
+        CancelInvoke("Think"); //Think í•¨ìˆ˜ ì·¨ì†Œ
+        Invoke("Think", 1f); //2ì´ˆ ë’¤ì— Think í•¨ìˆ˜ ì‹¤í–‰
         Debug.Log(nextMove);
 
     }
@@ -69,7 +68,7 @@ public class EnemyMove : MonoBehaviour
     public void OnDamaged()
     {
         //Sprite Alpha
-        spriteRenderer.color = new Color(1, 1, 1, 0.4f); //Åõ¸íµµ Á¶Àı
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f); //íˆ¬ëª…ë„ ì¡°ì ˆ
         //Sprote Flip Y
         spriteRenderer.flipY = true;
         //Collider Disable

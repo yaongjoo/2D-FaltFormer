@@ -1,11 +1,11 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
-{ //Á¡¼ö¿Í ½ºÅ×ÀÌÁö¸¦ °ü¸®
+{ //ì ìˆ˜ì™€ ìŠ¤í…Œì´ì§€ë¥¼ ê´€ë¦¬
 
     public int totalPoint;
     public int stagePoint;
@@ -43,8 +43,8 @@ public class GameManager : MonoBehaviour
             // Result UI
             Debug.Log("Game Clear!");
             // Restart Button UI
-            //¹öÆ° ÅØ½ºÆ®´Â ÀÚ½Ä¿ÀºêÁ§Æ®ÀÌ¹Ç·Î InChildrenÀ» »ç¿ë
-            TextMeshProUGUI btnText = UIRestartBtn.GetComponentInChildren<TextMeshProUGUI>(); // TextMeshPro »ç¿ë
+            //ë²„íŠ¼ í…ìŠ¤íŠ¸ëŠ” ìì‹ì˜¤ë¸Œì íŠ¸ì´ë¯€ë¡œ InChildrenì„ ì‚¬ìš©
+            TextMeshProUGUI btnText = UIRestartBtn.GetComponentInChildren<TextMeshProUGUI>(); // TextMeshPro ì‚¬ìš©
             btnText.text = "Clear!";
             UIRestartBtn.SetActive(true);
             // Player Control Lock
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         if (health > 1)
         {
             health--;
-            UIhealth[health].color = new Color(1, 0, 0, 0.4f); //UI HealthÀÇ ÄÃ·¯¸¦ ¾îµÓ°Ô º¯°æ
+            UIhealth[health].color = new Color(1, 0, 0, 0.4f); //UI Healthì˜ ì»¬ëŸ¬ë¥¼ ì–´ë‘¡ê²Œ ë³€ê²½
         }
         else
         {

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -11,9 +11,9 @@ public class PlayerMove : MonoBehaviour
 
     void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>(); // ÃÊ±âÈ­
-        spriteRenderer = GetComponent<SpriteRenderer>(); // ÃÊ±âÈ­
-        anim = GetComponent<Animator>(); // ÃÊ±âÈ­
+        rigid = GetComponent<Rigidbody2D>(); // ì´ˆê¸°í™”
+        spriteRenderer = GetComponent<SpriteRenderer>(); // ì´ˆê¸°í™”
+        anim = GetComponent<Animator>(); // ì´ˆê¸°í™”
     }
 
     void Start()
@@ -21,13 +21,13 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    // ´Ü¹ßÀûÀÎ Å° ¾÷µ¥ÀÌÆ®´Â notmalized¸¦ ÀÌ¿ëÇÑ´Ù
+    // ë‹¨ë°œì ì¸ í‚¤ ì—…ë°ì´íŠ¸ëŠ” notmalizedë¥¼ ì´ìš©í•œë‹¤
 
-    void Update() //´Ü¹ßÀûÀÎ ¾÷µ¥ÀÌÆ®
+    void Update() //ë‹¨ë°œì ì¸ ì—…ë°ì´íŠ¸
     {
         //jump
 
-        if ((Input.GetButtonDown("Jump") && !anim.GetBool("isJumping"))) //GetÀ¸·Î ¾²¸é ÆÄ¶ó¹ÌÅÍ °ªÀ» ºÒ·¯¿Ã ¼ö ÀÖÀ½
+        if ((Input.GetButtonDown("Jump") && !anim.GetBool("isJumping"))) //Getìœ¼ë¡œ ì“°ë©´ íŒŒë¼ë¯¸í„° ê°’ì„ ë¶ˆëŸ¬ì˜¬ ìˆ˜ ìˆìŒ
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetBool("isJumping", true);
@@ -35,33 +35,33 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetButtonUp("Horizontal"))
         {
             //Stop speed
-            //normalized : º¤ÅÍ Å©±â¸¦ 1·Î ¸¸µç »óÅÂ(´ÜÀ§ º¤ÅÍ), ´ÜÀ§¸¦ ±¸ÇÒ ¶§ »ç¿ë(¹æÇâ)
-            rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y); //¼Ò¼öÁ¡ °öÇÒ ¶§´Â fºÙ¿©ÁÖ±â
+            //normalized : ë²¡í„° í¬ê¸°ë¥¼ 1ë¡œ ë§Œë“  ìƒíƒœ(ë‹¨ìœ„ ë²¡í„°), ë‹¨ìœ„ë¥¼ êµ¬í•  ë•Œ ì‚¬ìš©(ë°©í–¥)
+            rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y); //ì†Œìˆ˜ì  ê³±í•  ë•ŒëŠ” fë¶™ì—¬ì£¼ê¸°
         }
 
         //Direction Sprite
         if (Input.GetButton("Horizontal"))
         {
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
-            // -1ÀÌ¸é true, 1ÀÌ¸é false
+            // -1ì´ë©´ true, 1ì´ë©´ false
         }
 
         //Animation
-        if (Mathf.Abs(rigid.velocity.x) < 0.3) //Àı´ë°ªÀ» ½á¾ßµÊ (0.3º¸´Ù ÀÛÀ¸¸é ¸ØÃá °ÍÀ¸·Î °£ÁÖ)
+        if (Mathf.Abs(rigid.velocity.x) < 0.3) //ì ˆëŒ€ê°’ì„ ì¨ì•¼ë¨ (0.3ë³´ë‹¤ ì‘ìœ¼ë©´ ë©ˆì¶˜ ê²ƒìœ¼ë¡œ ê°„ì£¼)
         {
-            anim.SetBool("isWalking", false); //¸ØÃèÀ» ¶§
+            anim.SetBool("isWalking", false); //ë©ˆì·„ì„ ë•Œ
         }
         else
         {
-            anim.SetBool("isWalking", true); //°ÉÀ» ¶§
+            anim.SetBool("isWalking", true); //ê±¸ì„ ë•Œ
         }
     }
-    void FixedUpdate() //1ÃÊ¿¡ 50¹ø Á¤µµ ½ÇÇà
+    void FixedUpdate() //1ì´ˆì— 50ë²ˆ ì •ë„ ì‹¤í–‰
     {
         //Move speed
         //Move By Control
         float h = Input.GetAxisRaw("Horizontal");
-        rigid.AddForce(Vector2.right * h * 5, ForceMode2D.Impulse); //AddForce : ÈûÀ» °¡ÇÏ´Â °Í, Impulse : ¼ø°£ÀûÀÎ ÈûÀ» °¡ÇÔ
+        rigid.AddForce(Vector2.right * h * 5, ForceMode2D.Impulse); //AddForce : í˜ì„ ê°€í•˜ëŠ” ê²ƒ, Impulse : ìˆœê°„ì ì¸ í˜ì„ ê°€í•¨
 
         //Max Speed 
         if (rigid.velocity.x > maxSpeed) //right
@@ -74,11 +74,11 @@ public class PlayerMove : MonoBehaviour
         }
 
         //Landing Platform
-        if (rigid.velocity.y < 0) //¶³¾îÁú ¶§¸¸ raycast¸¦ ½÷¼­ ¶¥¿¡ ´ê¾Ò´ÂÁö È®ÀÎ
+        if (rigid.velocity.y < 0) //ë–¨ì–´ì§ˆ ë•Œë§Œ raycastë¥¼ ì´ì„œ ë•…ì— ë‹¿ì•˜ëŠ”ì§€ í™•ì¸
         {
-            Debug.DrawRay(rigid.position, Vector3.down/*½î´Â ¹æÇâ*/, new Color(0, 1, 0));
-            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1/*°Å¸®*/, LayerMask.GetMask("Platform")/*ÇÃ·§Æû ·¹ÀÌ¾î¿¡¸¸ ´ê°Ú½À´Ï´Ù*/);
-            if (rayHit.collider != null) //¸ÂÁö ¾ÊÀ¸¸é Äİ¶óÀÌ´õµµ ¾ø´Ù
+            Debug.DrawRay(rigid.position, Vector3.down/*ì˜ëŠ” ë°©í–¥*/, new Color(0, 1, 0));
+            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1/*ê±°ë¦¬*/, LayerMask.GetMask("Platform")/*í”Œë«í¼ ë ˆì´ì–´ì—ë§Œ ë‹¿ê² ìŠµë‹ˆë‹¤*/);
+            if (rayHit.collider != null) //ë§ì§€ ì•Šìœ¼ë©´ ì½œë¼ì´ë”ë„ ì—†ë‹¤
             {
 
                 if (rayHit.distance < 0.5f)
@@ -182,7 +182,7 @@ public class PlayerMove : MonoBehaviour
     public void OnDie()
     {
         //Sprite Alpha
-        spriteRenderer.color = new Color(1, 1, 1, 0.4f); //Åõ¸íµµ Á¶Àı
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f); //íˆ¬ëª…ë„ ì¡°ì ˆ
         //Sprite Flip Y
         spriteRenderer.flipY = true;
         //Collider Disable
